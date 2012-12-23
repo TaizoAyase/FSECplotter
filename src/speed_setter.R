@@ -1,4 +1,5 @@
-source("./commandline_reader.R")
+source("./src/commandline_reader.R")
+
 #speed setter for matrix
 conv2speed <- function(matrix_data, name = "all samples"){
   #get flow speed from command line

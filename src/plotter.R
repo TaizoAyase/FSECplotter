@@ -14,7 +14,7 @@ list2dataframe <- function(list){
 
 #function for plotting
 #output to pdf file
-plotter <- function(dataframe, pdf_path = "./", lwd = 1.0){
+ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0){
   g <- ggplot(df, aes(x = volume, y = intensity, group = sample_name, col = sample_name))
   default_plot <- g + geom_line(size = lwd) + theme_grey(22)
   plot <- default_plot
@@ -23,9 +23,9 @@ plotter <- function(dataframe, pdf_path = "./", lwd = 1.0){
   timedate <- gsub(":", "", Sys.time())
   plot_name <- paste("FSECplot_", timedate, ".pdf", sep = "")
   #change directory
-  setwd(basename(pdf_path))
+  setwd(pdf_path)
   
-  ggsave(plot_name, plot)
+  ggsave(plot_name, plot, width = 20, height = 12)
   return()
 }
 

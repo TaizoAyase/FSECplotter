@@ -4,6 +4,9 @@ source("./src/plotter.R")
 source("./src/speed_setter.R")
 
 argv <- commandArgs(trailingOnly = TRUE)
-raw_data <- list_maker(argv)
-data <- speed_setter(raw_data, ask = TRUE)
-FSECplotter(data)
+raw_data_list <- list_maker(argv)
+data_list <- speed_setter(raw_data_list, ask = TRUE)
+df <- list2dataframe(data_list)
+
+plot_path <- dirname(argv[1])
+ggplotter(df, plot_path)

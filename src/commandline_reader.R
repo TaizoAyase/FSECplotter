@@ -12,8 +12,8 @@ read.nu <- function(message){
 #returns logical vector
 read.yn <- function(message){
 	repeat{
-		message_out <- paste(message, "(type \"y\" (if yes) or \"n\" (if no))")
-		print(message)
+		message_out <- paste(message, '(type "y" (if yes) or "n" (if no))')
+		print(message_out)
     f_in <- file("stdin")
 		tmp <- readLines(f_in, 1)
 		if(tmp == "y"){
