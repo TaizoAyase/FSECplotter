@@ -1,5 +1,34 @@
 require(ggplot2)
 
+list2dataframe <- function(list){
+  df_out <- data.frame()
+  list_len <- length(list)
+  for(li in 1:list_len){
+    name_vec <- rep(names(list)[li], nrow(list[[li]]))
+    list[[li]] <- cbind(list[[li]], name_vec)
+    df_out <- rbind(df_out, list[[li]])
+  }
+  colnames(df_out) <- c("volume", "intensity", "sample_name")
+  return(df_out)
+}#=> data.frame, ncol = 3
+
+#function for plotting
+#output to pdf file
+plotter <- function(dataframe, pdf_path = "./", lwd = 1.0){
+  g <- ggplot(df, aes(x = volume, y = intensity, group = sample_name, col = sample_name))
+  default_plot <- g + geom_line(size = lwd) + theme_grey(22)
+  plot <- default_plot
+  
+  #generate Plot File Name
+  timedate <- gsub(":", "", Sys.time())
+  plot_name <- paste("FSECplot_", timedate, ".pdf", sep = "")
+  #change directory
+  setwd(basename(pdf_path))
+  
+  ggsave(plot_name, plot)
+  return()
+}
+
 #-*- old version -*-
 #using default plot() function
 #not loaded on memory

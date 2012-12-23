@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.DS_Store
+.Rapp.history
+FSEC_BatchPlot.R
+FSECplotter.Rproj
+FSECplotter.app
+commandline_reader.R
+logfile_parser.R
+ggplot_test.R
+plotter.R
+plotter_for04.bat

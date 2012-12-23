@@ -1,32 +1,9 @@
-read.nu <- function(str){
-  print(str)
-	tmp <- readLines(file("stdin"), 1)
-	nu <- suppressWarnings(as.numeric(tmp))
-	return(nu)
-}
-
-#ask yes or no
-#returns logical vector
-read.yn <- function(str){
-	repeat{
-		message <- paste(str, "(type \"y\" (if yes) or \"n\" (if no))")
-		print(message)
-		tmp <- readLines(file("stdin"), 1)
-		if(tmp == "y"){
-			return(TRUE)
-			break
-		}else if(tmp == "n"){
-			return(FALSE)
-			break
-		}
-	}
-}
-
+source("./commandline_reader.R")
 #speed setter for matrix
 conv2speed <- function(matrix_data, name = "all samples"){
   #get flow speed from command line
-  str = paste("Enter flow speed(ml/min) for", name)
-  speed <- read.nu(str)
+  message = paste("Enter flow speed(ml/min) for", name)
+  speed <- read.nu(message)
   #[, 1] * speed, [, 2] * 1
   result <- sweep(matrix_data, MARGIN = 2, c(speed, 1), FUN = "*")
   return(result)
@@ -34,10 +11,10 @@ conv2speed <- function(matrix_data, name = "all samples"){
 
 #speed setter for list
 #different value can be set for each element
+#ask user:flow speed is same value among the all samples?
+#if TRUE, use lapply function
+#if not, use for loop and set each flow speed
 speed_setter_ask <- function(list_data){
-	#ask user:flow speed is same value among the all samples?
-  #if TRUE, use lapply function
-  #if not, use for loop and set each flow speed
   flag <- read.yn("Is flow speed the same value among all samples?")
   if(flag){
     speed <- read.nu("Enter flow speed(ml/min)")

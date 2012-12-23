@@ -1,3 +1,4 @@
+#parse single FSEC logfile
 logfileParser <- function(file, detector = "B"){
 	#the patameter "detector" is "A" OR "B"
 	
@@ -40,14 +41,13 @@ logfileParser <- function(file, detector = "B"){
 	#search the elements including NA(character)
 	na_list <- lapply(data_numeric, FUN = is.na) #=> logical vector
 
-	#create the logical vector:
-	#which element of data list is character
+	#create the logical vector which element of data list is character
 	data_na <- unlist(lapply(na_list, FUN = any)) #=> logical vector
 
-	#store the numeric data and return
+	#store the numeric data
 	time_int_list <- data_numeric[!data_na]
 
-	#create matrix
+	#create data.frame
 	num_len <- length(time_int_list)
 	m <- matrix(NA, ncol = 2, nrow = num_len)
 	for(i in 1:num_len){
