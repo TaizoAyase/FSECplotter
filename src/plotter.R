@@ -1,31 +1,34 @@
 require(ggplot2)
 
+#convert list to single dataframe
 list2dataframe <- function(list){
   df_out <- data.frame()
   list_len <- length(list)
+  
+  #bind all dataframe to single dataframe
   for(li in 1:list_len){
     name_vec <- rep(names(list)[li], nrow(list[[li]]))
     list[[li]] <- cbind(list[[li]], name_vec)
     df_out <- rbind(df_out, list[[li]])
   }
-  colnames(df_out) <- c("volume", "intensity", "sample_name")
+  
+  colnames(df_out) <- c("volume", "intensity", "name")
   return(df_out)
 }#=> data.frame, ncol = 3
 
-#function for plotting
-#output to pdf file
+#function for plotting, output to pdf file
 ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0){
-  g <- ggplot(df, aes(x = volume, y = intensity, group = sample_name, col = sample_name))
+  g <- ggplot(df, aes(x = volume, y = intensity, group = name, col = name))
   default_plot <- g + geom_line(size = lwd) + theme_grey(22)
-  plot <- default_plot
+  final_plot <- default_plot
   
-  #generate Plot File Name
+  #generate Plot File Name from System Time
   timedate <- gsub(":", "", Sys.time())
   plot_name <- paste("FSECplot_", timedate, ".pdf", sep = "")
   #change directory
   setwd(pdf_path)
   
-  ggsave(plot_name, plot, width = 20, height = 12)
+  ggsave(plot_name, final_plot, width = 20, height = 12)
   return()
 }
 
