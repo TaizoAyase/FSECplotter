@@ -53,7 +53,9 @@ logfileParser <- function(file, detector = "B"){
 	for(i in 1:num_len){
 		m[i, ] <- time_int_list[[i]]
 	}
-	return(as.data.frame(m))
+	time_int_df <- as.data.frame(m)
+  colnames(time_int_df) <- c("time", "intensity")
+	return(time_int_df)
 } #=> data.frame
 
 #input files(vector)

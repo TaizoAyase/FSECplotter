@@ -19,24 +19,27 @@ speed_setter_ask <- function(list_data){
   flag <- read.yn("Is flow speed the same value among all samples?")
   if(flag){
     speed <- read.nu("Enter flow speed(ml/min)")
-    result <- lapply(list_data, FUN = sweep, 2, c(speed, 1), "*")
+    list_speed <- lapply(list_data, FUN = sweep, 2, c(speed, 1), "*")
     #gc(); gc()
+    result <- lapply(list_speed, FUN = "colnames<-", c("volume", "intensity"))
     return(result)
   }else{
-    result <- list()
+    list_speed <- list()
     len <- length(list_data)
     for(i in 1:len){
       name <- names(list_data[i])
-      result[[i]] <- conv2speed(list_data[[i]], name)
-      names(result)[i] <- name
+      list_speed[[i]] <- conv2speed(list_data[[i]], name)
+      names(list_speed)[i] <- name
     }
+    result <- lapply(list_speed, FUN = "colnames<-", c("volume", "intensity"))
     return(result)
   }
 }
 
 #speed setter for not asking to user
 speed_setter_no_ask <- function(list_data, speed){
-  result <- lapply(list_data, FUN = sweep, 2, c(speed, 1), "*")
+  list_speed <- lapply(list_data, FUN = sweep, 2, c(speed, 1), "*")
+  result <- lapply(list_speed, FUN = "colnames<-", c("volume", "intensity"))
   return(result)
 }
 
