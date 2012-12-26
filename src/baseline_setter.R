@@ -27,3 +27,9 @@ set_gradient_baseline <- function(dataframe, colum_size = 30){
   dataframe[, 2] <- dataframe[, 2] - base_line(dataframe[, 1], lm_result)
   return(dataframe)
 }
+
+#set baseline; user interface
+set_baseline <- function(data_list, ask = TRUE, colum_size = 30){
+  out_list <- lapply(data_list, set_gradient_baseline, colum_size = colum_size)
+  return(out_list)
+}
