@@ -18,7 +18,7 @@ list2dataframe <- function(list){
 
 #function for plotting, output to pdf file
 ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0){
-  g <- ggplot(df, aes(x = volume, y = intensity, group = name, col = name))
+  g <- ggplot(dataframe, aes(x = volume, y = intensity, group = name, col = name))
   default_plot <- g + geom_line(size = lwd) + theme_grey(22)
   final_plot <- default_plot
   
