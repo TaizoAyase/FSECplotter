@@ -32,7 +32,7 @@ ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0, ylimit = NA){
   #change directory
   setwd(pdf_path)
   
-  ggsave(plot_name, final_plot, width = 20, height = 12)
+  ggsave(plot_name, final_plot, width = 12.5, height = 7.5)
   return()
 }
 
