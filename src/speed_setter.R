@@ -43,7 +43,7 @@ speed_setter_no_ask <- function(list_data, speed){
   return(result)
 }
 
-#public user interface
+#interface
 set_speed <- function(list_data, speed, ask = FALSE){
   if(ask){
     return(speed_setter_ask(list_data))
