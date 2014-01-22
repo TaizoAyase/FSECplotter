@@ -19,7 +19,7 @@ list2dataframe <- function(list){
 #function for plotting, output to pdf file
 ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0, ylimit = NA){
   g <- ggplot(dataframe, aes(x = volume, y = intensity, group = name, col = name))
-  default_plot <- g + geom_line(size = lwd) + theme_bw(22)
+  default_plot <- g + geom_line(size = lwd) + theme_bw(22) + xlab("volume(mL)") + ylab("FL intensity")
   if(is.na(ylimit)){
     final_plot <- default_plot
   }else{
