@@ -17,13 +17,22 @@ list2dataframe <- function(list){
 }#=> data.frame, ncol = 3
 
 #function for plotting, output to pdf file
-ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0, ylimit = NA){
+ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0, xlimit = NA, ylimit = NA){
   g <- ggplot(dataframe, aes(x = volume, y = intensity, group = name, col = name))
   default_plot <- g + geom_line(size = lwd) + theme_bw(22) + xlab("volume(mL)") + ylab("FL intensity")
+  
+  #set y-limit
   if(is.na(ylimit)){
-    final_plot <- default_plot
+    plot <- default_plot
   }else{
-    final_plot <- default_plot + ylim(0, ylimit)
+    plot <- default_plot + ylim(0, ylimit)
+  }
+  
+  #set x-limit
+  if(is.na(xlimit)){
+    final_plot <- plot
+  }else{
+    final_plot <- plot + xlim(xlimit)
   }
   
   #generate Plot File Name from System Time
