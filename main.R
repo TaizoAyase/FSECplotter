@@ -12,8 +12,11 @@ raw_data_list <- list_maker(argv)
 #set speed
 data_list <- set_speed(raw_data_list, ask = TRUE)
 
+#set xlimit
+mes <- "Do you want to set min-max value of X axis?"
+x_limit <- set_xlimit() ### some vecotor
+
 #set ylimit
-mes <- "Do you want to set max value of Y axis?"
 y_limit <- set_ylimit()
 
 #set baseline
@@ -25,4 +28,4 @@ y_limit <- set_ylimit()
 
 df <- list2dataframe(data_list)
 plot_path <- dirname(argv[1])
-ggplotter(df, plot_path, ylimit = y_limit)
+ggplotter(df, plot_path, xlimit = x_limit, ylimit = y_limit)
