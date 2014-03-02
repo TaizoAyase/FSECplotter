@@ -1,0 +1,2 @@
+FlowSpeed: 0.4
+AskFlowSpeed: TRUE
