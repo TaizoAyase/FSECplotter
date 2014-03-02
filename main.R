@@ -13,8 +13,7 @@ raw_data_list <- list_maker(argv)
 data_list <- set_speed(raw_data_list, ask = TRUE)
 
 #set xlimit
-mes <- "Do you want to set min-max value of X axis?"
-x_limit <- set_xlimit() ### some vecotor
+x_limit <- set_xlimit() 
 
 #set ylimit
 y_limit <- set_ylimit()
