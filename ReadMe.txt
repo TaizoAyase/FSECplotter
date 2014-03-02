@@ -44,6 +44,9 @@ Rscript main.R と打ったあとに、ファイルをドラッグ&ドロップ�
 
 - * - release note - * - 
 
+20140302 vesion 1.2 公開
+・X軸範囲設定追加
+
 20130912 version 1.1 公開
 ・Y軸上限値の設定を実装
 ・Baselineの補正機能を削除
