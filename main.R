@@ -5,9 +5,17 @@ source("./src/speed_setter.R")
 source("./src/limit_setter.R")
 #source("./src/baseline_setter.R")
 
+#select detector
+mes <- "Select detector A or B"
+repeat{
+  detector <- read.str(mes)
+  flag = (detector == "A" || detector == "B")
+  if(flag) break
+}
+
 #read data from command line
 argv <- commandArgs(trailingOnly = TRUE)
-raw_data_list <- list_maker(argv)
+raw_data_list <- list_maker(argv, detector)
 
 #set speed
 data_list <- set_speed(raw_data_list, ask = TRUE)
