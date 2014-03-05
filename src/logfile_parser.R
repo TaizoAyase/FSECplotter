@@ -60,13 +60,13 @@ logfileParser <- function(file, detector = "B"){
 
 #input files(vector)
 #output list; time * intensity
-list_maker <- function(files){
+list_maker <- function(files, detector = "B"){
   file_name <- basename(files)
   list_name <- gsub(".txt$", "",file_name)
   
   output_ls <- list()
   for(i in 1:length(files)){
-    output_ls[[i]] <- logfileParser(files[i])
+    output_ls[[i]] <- logfileParser(files[i], detector = detector)
     names(output_ls)[i] <- list_name[i]
   }
   return(output_ls)

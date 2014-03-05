@@ -28,3 +28,14 @@ read.yn <- function(message){
 		}
 	}
 }#=> logical
+
+#ask char
+#returns charactor vector (length = 1)
+read.str <- function(message){
+  message_out <- paste(message, "\n")
+  cat(message_out)
+  f_in <- file("stdin")
+  str <- readLines(f_in, 1)
+  close(f_in)
+  return(str)
+}#=> charactor
