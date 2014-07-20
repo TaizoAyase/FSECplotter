@@ -86,14 +86,30 @@ logfileParser <- function(file, detector = "B"){
 
 #input files(vector)
 #output list; time * intensity
-list_maker <- function(files, detector = "B"){
+list_maker <- function(files){
   file_name <- basename(files)
   list_name <- gsub(".txt$", "",file_name)
   
   output_ls <- list()
   for(i in 1:length(files)){
+    detector <- define_detector(files[i])
     output_ls[[i]] <- logfileParser(files[i], detector = detector)
     names(output_ls)[i] <- list_name[i]
   }
   return(output_ls)
 } #=> list
+
+# define the detector for plot
+define_detector <- function(file){
+  detector_config <- get_section(file, "[Configuration]")
+  pos_detID <- grep('Detector ID', detector_config)
+  detector_list <- detector_config[[pos_detID]]
+  
+  # if the file has two detectors(i.e. has "Detector B"), use it
+  if("Detector B" %in% detector_list){
+    return("B")
+  }else{
+    # if not, use "Detector A"
+    return("A")
+  }
+}
