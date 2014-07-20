@@ -5,17 +5,20 @@ source("./src/speed_setter.R")
 source("./src/limit_setter.R")
 #source("./src/baseline_setter.R")
 
+# detector selector is not used in current version
 #select detector
-mes <- "Select detector A or B"
-repeat{
-  detector <- read.str(mes)
-  flag = (detector == "A" || detector == "B")
-  if(flag) break
-}
+#mes <- "Select detector A or B"
+#repeat{
+#  detector <- read.str(mes)
+#  flag = (detector == "A" || detector == "B")
+#  if(flag) break
+#}
 
 #read data from command line
 argv <- commandArgs(trailingOnly = TRUE)
-raw_data_list <- list_maker(argv, detector)
+# arg of detector is not used
+#raw_data_list <- list_maker(argv, detector)
+raw_data_list <- list_maker(argv)
 
 #set speed
 data_list <- set_speed(raw_data_list, ask = TRUE)
