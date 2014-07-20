@@ -2,7 +2,7 @@ source("./src/commandline_reader.R")
 
 # set min-max limit of x-axis
 # get two numeric value from command line
-set_xlimit <- function(){
+set_xlimit <- function(ask = FALSE, start = 0, end = 24){
   mes <- "Do you want to set min-max value of X-axis?"
   ans <- read.yn(mes)
   if(!ans) return(NA)

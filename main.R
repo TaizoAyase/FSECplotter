@@ -5,14 +5,26 @@ source("./src/speed_setter.R")
 source("./src/limit_setter.R")
 #source("./src/baseline_setter.R")
 
+require(rjson)
+
+# read configfile
+conf <- fromJSON(file = "./config.json")
+
 # detector selector is not used in current version
-#select detector
-#mes <- "Select detector A or B"
-#repeat{
-#  detector <- read.str(mes)
-#  flag = (detector == "A" || detector == "B")
-#  if(flag) break
-#}
+# select detector
+if(conf$AutoSelectDetector){
+  # do nothing.
+  cat("Detector will be selected automatically...\n")
+} else if(conf$AskDetector){
+  mes <- "Select detector A or B"
+  repeat{
+    detector <- read.str(mes)
+    flag = (detector == "A" || detector == "B")
+    if(flag) break
+  }
+} else {
+  detector <- conf$DefaultDetector
+}
 
 #read data from command line
 argv <- commandArgs(trailingOnly = TRUE)
@@ -23,11 +35,37 @@ raw_data_list <- list_maker(argv)
 #set speed
 data_list <- set_speed(raw_data_list, ask = TRUE)
 
+# define column type 
+# large OR mini
+# total volume < 10 => mini, else => large
+if(all(data_list[[1]] < 10)){
+  column_type <- 'mini'
+} else {
+  column_type <- 'large'
+}
+
 #set xlimit
-x_limit <- set_xlimit() 
+if(column_type == "mini"){
+  # do nothing
+  x_limit <- NA
+  cat("I guess your column type is mini column. X-axis scaling will be skipped...\n")
+} else if(conf$AskXscaling){
+  # Ask the scale limit of x-axis to user
+  x_limit <- set_xlimit() 
+} else {
+  # set default value
+  x_limit <- conf$DefaultXscaling
+  cat("Set X-axis min/max to", x_limit, "\n")
+}
 
 #set ylimit
-y_limit <- set_ylimit()
+if(conf$AskYscaling){
+  # Ask the scale limit of y-axis to user
+  y_limit <- set_ylimit()
+} else {
+  y_limit <- NA
+  cat("Y-axis limit will not be set...\n")
+}
 
 #set baseline
 #!!! this baseline setter is not used in the latest version !!!

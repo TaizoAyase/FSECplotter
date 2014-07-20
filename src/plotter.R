@@ -22,14 +22,14 @@ ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0, xlimit = NA, ylimit
   default_plot <- g + geom_line(size = lwd) + theme_bw(22) + xlab("volume(mL)") + ylab("FL intensity")
   
   #set y-limit
-  if(is.na(ylimit)){
+  if(is.na(ylimit[1])){
     plot <- default_plot
   }else{
     plot <- default_plot + ylim(0, ylimit)
   }
   
   #set x-limit
-  if(is.na(xlimit)){
+  if(is.na(xlimit[1])){
     final_plot <- plot
   }else{
     final_plot <- plot + xlim(xlimit)
@@ -42,7 +42,6 @@ ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0, xlimit = NA, ylimit
   setwd(pdf_path)
   
   ggsave(plot_name, final_plot, width = 12.5, height = 7.5)
-  return()
 }
 
 #-*- old version -*-
