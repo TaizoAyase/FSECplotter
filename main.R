@@ -33,7 +33,15 @@ argv <- commandArgs(trailingOnly = TRUE)
 raw_data_list <- list_maker(argv)
 
 #set speed
-data_list <- set_speed(raw_data_list, ask = TRUE)
+#if(conf$AskEachFlowSpeed){
+  #data_list <- set_speed(raw_data_list, ask = TRUE, ask_each = TRUE)
+#} else if(conf$AskFlowSpeed){
+  #data_list <- set_speed(raw_data_list, ask = TRUE, ask_each = FALSE)
+#} else {
+  #data_list <- set_speed(raw_data_list, conf$DefaultFlowSpeed, ask = FALSE)
+#}
+data_list <- set_speed(raw_data_list, conf$DefaultFlowSpeed, 
+                       ask = conf$AskFlowSpeed, ask_each = conf$AskEachFlowSpeed)
 
 # define column type 
 # large OR mini

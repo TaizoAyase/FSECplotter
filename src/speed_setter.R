@@ -12,9 +12,13 @@ conv2speed <- function(matrix_data, name = "all samples"){
 
 #speed setter for list
 #different value can be set for each element
-speed_setter_ask <- function(list_data){
-  #ask user:flow speed is same value among the all samples?
-  flag <- read.yn("Is flow speed the same value among all samples?")
+speed_setter_ask <- function(list_data, ask_each = TRUE){
+  if(ask_each){
+    #ask user:flow speed is same value among the all samples?
+    flag <- read.yn("Is flow speed the same value among all samples?")
+  } else {
+    flag <- TRUE
+  }
   
   #if TRUE, use lapply function
   if(flag){
@@ -44,9 +48,9 @@ speed_setter_no_ask <- function(list_data, speed){
 }
 
 #interface
-set_speed <- function(list_data, speed, ask = FALSE){
+set_speed <- function(list_data, speed, ask = FALSE, ask_each = FALSE){
   if(ask){
-    return(speed_setter_ask(list_data))
+    return(speed_setter_ask(list_data, ask_each))
   }else{
     return(speed_setter_no_ask(list_data, speed))
   }

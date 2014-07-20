@@ -3,7 +3,7 @@
   "AskDetector" : true, 
   "DefaultDetector" : "B",
   "AskFlowSpeed" : true, 
-  "AskEachFlowSpeed" : true, 
+  "AskEachFlowSpeed" : false, 
   "DefaultFlowSpeed": 0.5,
   "AskXscaling" : false,
   "DefaultXscaling" : [8, 18],
