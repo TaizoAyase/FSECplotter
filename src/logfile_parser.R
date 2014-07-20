@@ -1,3 +1,29 @@
+
+get_section <- function(file, section_name){
+  logfile <- readLines(file, encoding = "UTF-8")
+  
+  # search:data of "section_name"
+  # set start
+  data_start <- which(logfile == section_name)
+    
+	#search the blank
+	blank_row <- which(logfile == "")
+	#define the end of data:
+	#next blank from the row of "[LC Chromatogram(Detector X-Ch1)]"
+	data_end <- blank_row[min(which(data_start < blank_row))]
+	
+	#store the raw data as character format
+	#separated by \t
+	data <- logfile[data_start:(data_end - 1)] #=> vector of character
+  
+	#split the raw data by \t:
+	#generating list of character
+	data_split <- strsplit(data, "\t") #=> list
+  
+  return(data_split)
+}
+
+
 #parse single FSEC logfile
 logfileParser <- function(file, detector = "B"){
 	#the patameter "detector" is "A" OR "B"
