@@ -46,7 +46,7 @@ data_list <- set_speed(raw_data_list, conf$DefaultFlowSpeed,
 # define column type 
 # large OR mini
 # total volume < 10 => mini, else => large
-if(all(data_list[[1]] < 10)){
+if(all(data_list[[1]][1] < 15)){
   column_type <- 'mini'
 } else {
   column_type <- 'large'

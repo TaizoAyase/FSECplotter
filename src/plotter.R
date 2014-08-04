@@ -25,7 +25,7 @@ ggplotter <- function(dataframe, pdf_path = "./", lwd = 1.0, xlimit = NA, ylimit
   if(is.na(ylimit[1])){
     plot <- default_plot
   }else{
-    plot <- default_plot + ylim(0, ylimit)
+    plot <- default_plot + ylim(-5000, ylimit)
   }
   
   #set x-limit
