@@ -9,30 +9,30 @@ require(rjson)
 
 # args
 argv <- commandArgs(trailingOnly = TRUE)
-detector <- argv[1]
+channel <- as.character(argv[1]) # this must be "1" or "2"
 files <- argc[2:length(argv)]
 
 # read configfile
 conf <- fromJSON(file = "./config.json")
 
-# detector selector is not used in current version
+##### detector selector is not used in current version #####
 # select detector
-if(conf$AutoSelectDetector){
-  # do nothing.
-  cat("Detector will be selected automatically...\n")
-} else if(conf$AskDetector){
-  mes <- "Select detector A or B"
-  repeat{
-    detector <- read.str(mes)
-    flag = (detector == "A" || detector == "B")
-    if(flag) break
-  }
-} else {
-  detector <- conf$DefaultDetector
-}
+#if(conf$AutoSelectDetector){
+#  # do nothing.
+#  cat("Detector will be selected automatically...\n")
+#} else if(conf$AskDetector){
+#  mes <- "Select detector A or B"
+#  repeat{
+#    detector <- read.str(mes)
+#    flag <- (detector == "A" || detector == "B")
+#    if(flag) break
+#  }
+#} else {
+#  detector <- conf$DefaultDetector
+#}
 
 #read data from args
-raw_data_list <- list_maker(files)
+raw_data_list <- list_maker(files, channel)
 
 #set speed
 #if(conf$AskEachFlowSpeed){

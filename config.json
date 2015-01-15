@@ -1,6 +1,5 @@
 {
   "AutoSelectDetector" : true, 
-  "AskDetector" : true, 
   "DefaultDetector" : "B",
   "AskFlowSpeed" : true, 
   "AskEachFlowSpeed" : false, 
