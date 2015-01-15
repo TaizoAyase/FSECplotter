@@ -25,15 +25,15 @@ get_section <- function(file, section_name){
 
 
 #parse single FSEC logfile
-logfileParser <- function(file, detector = "B"){
+logfileParser <- function(file, detector = "B", channel){
 	#the patameter "detector" is "A" OR "B"
 	
 	#search:data of detector
 	#set start
 	if(detector == "A"){
-    section_read <- "[LC Chromatogram(Detector A-Ch1)]"
+    section_read <- paste("[LC Chromatogram(Detector A-Ch", channel,")]", sep = "")
 	}else if(detector == "B"){
-    section_read <- "[LC Chromatogram(Detector B-Ch1)]"
+    section_read <- paste("[LC Chromatogram(Detector B-Ch", channel,")]", sep = "")
 	}
   
   # get the list of section of chromatogram table
@@ -67,14 +67,14 @@ logfileParser <- function(file, detector = "B"){
 
 #input files(vector)
 #output list; time * intensity
-list_maker <- function(files){
+list_maker <- function(files, channel){
   file_name <- basename(files)
   list_name <- gsub(".txt$", "",file_name)
   
   output_ls <- list()
   for(i in 1:length(files)){
     detector <- define_detector(files[i])
-    output_ls[[i]] <- logfileParser(files[i], detector = detector)
+    output_ls[[i]] <- logfileParser(files[i], detector = detector, channel = channel)
     names(output_ls)[i] <- list_name[i]
   }
   return(output_ls)

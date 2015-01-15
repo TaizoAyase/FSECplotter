@@ -3,14 +3,13 @@ source("./src/commandline_reader.R")
 source("./src/plotter.R")
 source("./src/speed_setter.R")
 source("./src/limit_setter.R")
-#source("./src/baseline_setter.R")
 
 require(rjson)
 
 # args
 argv <- commandArgs(trailingOnly = TRUE)
 channel <- as.character(argv[1]) # this must be "1" or "2"
-files <- argc[2:length(argv)]
+files <- argv[-1]
 
 # read configfile
 conf <- fromJSON(file = "./config.json")

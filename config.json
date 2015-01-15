@@ -1,10 +1,10 @@
 {
   "AutoSelectDetector" : true, 
   "DefaultDetector" : "B",
-  "AskFlowSpeed" : true, 
+  "AskFlowSpeed" : false, 
   "AskEachFlowSpeed" : false, 
   "DefaultFlowSpeed": 0.5,
   "AskXscaling" : false,
   "DefaultXscaling" : [8, 15],
-  "AskYscaling" : true
+  "AskYscaling" : false
 }
