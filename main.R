@@ -7,6 +7,11 @@ source("./src/limit_setter.R")
 
 require(rjson)
 
+# args
+argv <- commandArgs(trailingOnly = TRUE)
+detector <- argv[1]
+files <- argc[2:length(argv)]
+
 # read configfile
 conf <- fromJSON(file = "./config.json")
 
@@ -26,11 +31,8 @@ if(conf$AutoSelectDetector){
   detector <- conf$DefaultDetector
 }
 
-#read data from command line
-argv <- commandArgs(trailingOnly = TRUE)
-# arg of detector is not used
-#raw_data_list <- list_maker(argv, detector)
-raw_data_list <- list_maker(argv)
+#read data from args
+raw_data_list <- list_maker(files)
 
 #set speed
 #if(conf$AskEachFlowSpeed){
@@ -83,5 +85,5 @@ if(conf$AskYscaling){
 #}
 
 df <- list2dataframe(data_list)
-plot_path <- dirname(argv[1])
+plot_path <- dirname(files[1])
 ggplotter(df, plot_path, xlimit = x_limit, ylimit = y_limit)
