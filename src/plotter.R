@@ -1,4 +1,7 @@
-require(ggplot2)
+tryCatch(
+  {library(ggplot2)},
+  error = function(e){install.packages(ggplot2)}
+)
 
 #convert list to single dataframe
 list2dataframe <- function(list){

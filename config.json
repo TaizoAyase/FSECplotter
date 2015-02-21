@@ -5,6 +5,6 @@
   "AskEachFlowSpeed" : false, 
   "DefaultFlowSpeed": 0.5,
   "AskXscaling" : false,
-  "DefaultXscaling" : [8, 15],
+  "DefaultXscaling" : [0, 24],
   "AskYscaling" : false
 }

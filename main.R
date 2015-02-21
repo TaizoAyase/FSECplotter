@@ -4,7 +4,10 @@ source("./src/plotter.R")
 source("./src/speed_setter.R")
 source("./src/limit_setter.R")
 
-require(rjson)
+tryCatch(
+  {library(rjson)},
+  error = function(e){install.packages(rjson)}
+)
 
 # args
 argv <- commandArgs(trailingOnly = TRUE)
