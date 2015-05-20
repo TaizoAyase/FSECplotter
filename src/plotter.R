@@ -1,6 +1,6 @@
 tryCatch(
   {library(ggplot2)},
-  error = function(e){install.packages(ggplot2)}
+  error = function(e){install.packages("ggplot2", repos='http://cran.us.r-project.org')}
 )
 
 #convert list to single dataframe

@@ -1,12 +1,25 @@
+# set working directory to where this script file exists
+initial.options <- commandArgs(trailingOnly = FALSE)
+file.arg.name <- "--file="
+script.name <- sub(file.arg.name, "", initial.options[grep(file.arg.name, initial.options)])
+script.basename <- dirname(script.name)
+setwd(script.basename)
+
+# load functions
 source("./src/logfile_parser.R")
 source("./src/commandline_reader.R")
 source("./src/plotter.R")
 source("./src/speed_setter.R")
 source("./src/limit_setter.R")
 
+# TODO: add Channel info to the title of the graph
+# TODO: detector selector
+# TODO: rename the legend name from filename.
+
+# load rjson, or install rjson
 tryCatch(
   {library(rjson)},
-  error = function(e){install.packages(rjson)}
+  error = function(e){install.packages("rjson", repos='http://cran.us.r-project.org')}
 )
 
 # args
